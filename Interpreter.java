@@ -1,52 +1,34 @@
-
+/**
+ * @author jmeyer2s
+ */
 import java.util.Scanner;
 
 public class Interpreter {
     public static String verarbeite(Scanner sc) {
         String vor = "vor";
-        //String nach = "nach";
-        String in = "in";
         boolean ausgabeVorZeichenGewollt = true;
-        char zeichen = 'a';
+        char zeichen = '0';
         String zeichenfolge = "";
-        int i = 0;
-        int gefundenBei = -8;
+        int gefundenBei = -8;//-8 ist der fixwert für "nicht gefunden"
         while (sc.hasNext()) {
-            //Position Zeichen in Zeichenfolge
-            //"vor" "nach" binäre Entscheidung zwischen vor und nach gespeichert in variable 
+            // Position Zeichen in Zeichenfolge
+            // "vor" "nach" binäre Entscheidung zwischen vor und nach gespeichert in variable
             ausgabeVorZeichenGewollt = (sc.next().equals(vor));
             zeichen = sc.next().charAt(0);
-            in = sc.next();
+            sc.next();//SKIP
             zeichenfolge = sc.next();
-            i = 0;
-            //Position herausfinden von zeichen in zeichenfolge
-            while(i<zeichenfolge.length()){
-                if(zeichen == (zeichenfolge.charAt(i)) && gefundenBei == -8){
-                gefundenBei = i+1;//+1 stelle, ohne +1 index
-                }
-                i++;
-            }
-            System.out.println(zeichen);
-            System.out.println(zeichenfolge);
-            System.out.println(gefundenBei);
-
-            if(ausgabeVorZeichenGewollt){
-                if(gefundenBei== -8){
-                    return "";
-                }
-                return zeichenfolge.substring(0,gefundenBei);
-            }else{
-                if(gefundenBei== -8){
-                    return zeichenfolge;
-                }
-                return zeichenfolge.substring(gefundenBei,zeichenfolge.length());
+        }
+        for(int i=0;i < zeichenfolge.length();i++) {// Position herausfinden von zeichen in zeichenfolge 
+            if (zeichen == (zeichenfolge.charAt(i)) && gefundenBei == -8) {
+                gefundenBei = i + 1;// +1 stelle, ohne +1 index
             }
         }
-    return "";
+        if (gefundenBei == -8) {//nicht vorhanden
+            return ausgabeVorZeichenGewollt ? "" : zeichenfolge;
+        }
+        return ausgabeVorZeichenGewollt ?
+        zeichenfolge.substring(0, (gefundenBei-1)):
+        zeichenfolge.substring(gefundenBei, zeichenfolge.length());
     }
 
-    public static void main(String[] args) {
-       Scanner sc = new Scanner(System.in);
-        verarbeite(sc);
-    }
 }

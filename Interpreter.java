@@ -2,71 +2,51 @@
 import java.util.Scanner;
 
 public class Interpreter {
-    public static String verarbeite(Scanncer sc){
-
-        while (sc.hasNext()){
-
-            String position = sc.next();
-            String vor = sc.next();
-            String nach = sc.next();
-
-            String zeichen = sc.next();
-            
-            String in = sc.next();
-
-            String zeichenfolge = sc.next();
-
-            char diesePosition = zeichenfolge.charAt(i); //PROBLEM!!!!!- wo ist i? Digit von zeichen herausfinden!
-            char ende = position.length();
-
-            char vorne = zeichenfolge.substring(0, diesePosition);
-            char hinter = zeichenfolge.substring(diesePosition, ende); 
-
-            if (position.length() == nach.length()){
-                return hinten; 
-            } 
-            if (position.length()==nach.length()& zeichenfolge.length() != zeichen.length()){
-                return zeichenkette;
+    public static String verarbeite(Scanner sc) {
+        String vor = "vor";
+        //String nach = "nach";
+        String in = "in";
+        boolean ausgabeVorZeichenGewollt = true;
+        char zeichen = 'a';
+        String zeichenfolge = "";
+        int i = 0;
+        int gefundenBei = -8;
+        while (sc.hasNext()) {
+            //Position Zeichen in Zeichenfolge
+            //"vor" "nach" binäre Entscheidung zwischen vor und nach gespeichert in variable 
+            ausgabeVorZeichenGewollt = (sc.next().equals(vor));
+            zeichen = sc.next().charAt(0);
+            in = sc.next();
+            zeichenfolge = sc.next();
+            i = 0;
+            //Position herausfinden von zeichen in zeichenfolge
+            while(i<zeichenfolge.length()){
+                if(zeichen == (zeichenfolge.charAt(i)) && gefundenBei == -8){
+                gefundenBei = i+1;//+1 stelle, ohne +1 index
+                }
+                i++;
             }
-            if (position.length()== vor.length()){
-                return vorne; 
-            }else (position.length()== vor.length() & zeichenfolge.length() == zeichen.length()) {
-                return whitespace;
+            System.out.println(zeichen);
+            System.out.println(zeichenfolge);
+            System.out.println(gefundenBei);
+
+            if(ausgabeVorZeichenGewollt){
+                if(gefundenBei== -8){
+                    return "";
+                }
+                return zeichenfolge.substring(0,gefundenBei);
+            }else{
+                if(gefundenBei== -8){
+                    return zeichenfolge;
+                }
+                return zeichenfolge.substring(gefundenBei,zeichenfolge.length());
             }
         }
+    return "";
     }
 
-    public static String verarbeite(Scanncer sc, String s){
-
-        while (sc.hasNext()){
-
-            String position = sc.next();
-            String vor = sc.next();
-            String nach = sc.next();
-
-            String zeichen = sc.next(); //
-            
-            String in = sc.next();
-
-            String zeichenfolge = sc.next();
-
-            char diesePosition = zeichenposition.charAt(i); //PROBLEM!!!!!- wo ist i? Digit von zeichen herausfinden!
-            char ende = position.lenght()-1;
-
-            char vorne = zeichenfolge.substring(0, diesePosition);
-            char hinter = zeichenfolge.substring(diesePosition, ende); 
-
-            if (position.length() == nach.lenght()){
-                return hinten; 
-            } 
-            if (position.length()==nach.length()& zeichenfolge.length() != zeichen.length()){
-                return zeichenkette;
-            }
-            if (position.length()== vor.length()){
-                return vorne; 
-            }else (position.length()== vor.length() & zeichenfolge.length() == zeichen.length()) {
-                return whitespace;
-            }
-        }
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+        verarbeite(sc);
     }
 }

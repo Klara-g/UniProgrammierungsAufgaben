@@ -1,0 +1,4 @@
+{
+    "java.checkstyle.configuration": "${workspaceFolder}/EidiP/Eclipse Preferences (Stylecheck)/tludwi2s_formatter.xml",
+    "java.checkstyle.version": "8.37"
+}

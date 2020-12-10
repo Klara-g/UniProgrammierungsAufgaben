@@ -10,22 +10,26 @@ public class Interpreter {
     boolean ausgabeVorZeichenGewollt = true;
     char zeichen = '0';
     String zeichenfolge = "";
-    int gefundenBei = -8; // -8 ist der fixwert für "nicht gefunden"
+    int gefundenBei = 0;
+    boolean wurdegefunden = false; // false ist der fixwert für "nicht gefunden"
     while (sc.hasNext()) {
 // Position Zeichen in Zeichenfolge
 // "vor" "nach" binäre Entscheidung zwischen vor und nach gespeichert in variable
       ausgabeVorZeichenGewollt = (sc.next().equals(vor));
       zeichen = sc.next().charAt(0);
-      sc.next(); // SKIP
+      sc.next(); // SKIP für IN
       zeichenfolge = sc.next();
     }
-    for (int i = 0; i < zeichenfolge.length(); i++) {// Position
+    int i = 0;
+    while (i < zeichenfolge.length()) { // Position
 //herausfinden von zeichen in zeichenfolge
-      if (zeichen == (zeichenfolge.charAt(i)) && gefundenBei == -8) {
+      if (zeichen == (zeichenfolge.charAt(i)) && !wurdegefunden) {
         gefundenBei = i + 1; // +1 stelle, ohne +1 index
+        wurdegefunden = true;
       }
+      i++;
     }
-    if (gefundenBei == -8) { // nicht vorhanden
+    if (!wurdegefunden) { // nicht vorhanden
       return ausgabeVorZeichenGewollt ? "" : zeichenfolge;
     }
     return ausgabeVorZeichenGewollt ? zeichenfolge.substring(0, (gefundenBei - 1))

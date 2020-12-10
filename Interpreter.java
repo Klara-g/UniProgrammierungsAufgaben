@@ -23,7 +23,7 @@ public class Interpreter {
     int i = 0;
     while (i < zeichenfolge.length()) { // Position
 //herausfinden von zeichen in zeichenfolge
-      if (zeichen == (zeichenfolge.charAt(i)) && !wurdegefunden) {
+      if (!wurdegefunden && zeichen == (zeichenfolge.charAt(i))) {
         gefundenBei = i + 1; // +1 stelle, ohne +1 index
         wurdegefunden = true;
       }
